@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TechedMVC.Models.ViewModel.CoinViewModel>
+
+@{
+    ViewData["Title"] = "Spremljene vrijednosti";
+}
+
+<h1 class="my-5">Lista spremljenih vrijednosti</h1>
+<div class="container">
+    <table id="dbTable" class="display table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Naziv
+                </th>
+                <th>
+                    Trenutačna cijena
+                </th>
+                <th>
+                    Promjena cijene u 24h
+                </th>
+                <th>
+                    Zadnje ažurirano
+                </th>
+                <th>
+                    Spremljeno
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrentPrice)
+                    </td>
+                    <td>
+                        @item.PriceChangePercentage24h%
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdated)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChangedAt)
+                    </td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <a class="btn btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Uredi</a>
+                            <a class="btn btn btn-info" asp-action="Details" asp-route-id="@item.Id">Detalji</a>
+                            <a class="btn btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Izbriši</a>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#dbTable').DataTable({
+                "language": {
+                    url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/hr.json'
+                },
+                "order": [[4, 'desc']] 
+            });
+        });
+    </script>
+}

@@ -1,0 +1,119 @@
+﻿@model TechedMVC.Models.ViewModel.CoinViewModel
+
+@{
+    ViewData["Title"] = "Uredi";
+
+}
+<h2 class="text-center py-2">Uredi - @Model.Name</h2>
+
+<div class="container">
+    <hr />
+    <div class="row">
+        <div class="col-lg-6 col-md-10 mx-auto">
+            <div class="card">
+                <div class="text-center">
+                    <img id="image-preview" class="img-fluid rounded-3" src="@Model.ImageURL" alt="Image Preview" />
+                </div>
+                <div class="container">
+                    <form asp-controller="Coin" asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="Symbol" class="control-label my-2"></label>
+                            <input asp-for="Symbol" class="form-control mb-1" />
+                            <span asp-validation-for="Symbol" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label my-2"></label>
+                            <input asp-for="Name" class="form-control mb-1" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ImageURL" class="control-label my-2"></label>
+                            <input asp-for="ImageURL" class="form-control mb-1" />
+                            <span asp-validation-for="ImageURL" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CurrentPrice" class="control-label my-2"></label>
+                            <div class="input-group mb-1">
+                                <span class="input-group-text">$</span>
+                                <input asp-for="CurrentPrice" class="form-control" />
+                                <span asp-validation-for="CurrentPrice" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="MarketCapRank" class="control-label my-2"></label>
+                            <input asp-for="MarketCapRank" class="form-control mb-1" />
+                            <span asp-validation-for="MarketCapRank" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PriceChangePercentage24h" class="control-label my-2"></label>
+                            <div class="input-group mb-1">
+                                <input asp-for="PriceChangePercentage24h" class="form-control" />
+                                <span class="input-group-text">%</span>
+                                <span asp-validation-for="PriceChangePercentage24h" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CirculatingSupply" class="control-label my-2"></label>
+                            <input asp-for="CirculatingSupply" class="form-control mb-1" />
+                            <span asp-validation-for="CirculatingSupply" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TotalSupply" class="control-label my-2"></label>
+                            <input asp-for="TotalSupply" class="form-control mb-1" />
+                            <span asp-validation-for="TotalSupply" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MaxSupply" class="control-label my-2"></label>
+                            <input asp-for="MaxSupply" class="form-control mb-1" />
+                            <span asp-validation-for="MaxSupply" class="text-danger"></span>
+                        </div>
+                        <!--
+                        <div class="form-group">
+                            <label asp-for="LastUpdated" class="control-label"></label>
+                            <input asp-for="LastUpdated" class="form-control" value="@Model.LastUpdated" />
+                            <span asp-validation-for="LastUpdated" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ChangedAt" class="control-label"></label>
+                            <input asp-for="ChangedAt" class="form-control" value="@Model.ChangedAt />
+                            <span asp-validation-for="ChangedAt" class="text-danger"></span>
+                        </div>
+                        -->
+                        <div class="form-group mt-4 mb-1 text-center">
+                            <input type="submit" value="Spremi promjene" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a class="btn btn-outline-primary mt-3" asp-action="Index">Lista vrijednosti iz baze</a>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Function to update the image preview
+        function updateImagePreview() {
+            var imageUrl = $('#ImageURL').val();
+            $('#image-preview').attr('src', imageUrl);
+        }
+
+        // Event handler for the ImageURL input change
+        $('#ImageURL').on('input', updateImagePreview);
+
+        // Initial update of the image preview
+        updateImagePreview();
+    </script>
+}
