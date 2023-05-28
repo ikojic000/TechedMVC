@@ -38,7 +38,7 @@ namespace TechedMVC.Controllers
         [HttpPost]
         public IActionResult Add(string CoinViewModel)
         {
-            CoinViewModel coinViewModel = JsonConvert.DeserializeObject<CoinViewModel>(CoinViewModel);
+            var coinViewModel = JsonConvert.DeserializeObject<CoinViewModel>(CoinViewModel);
 
             if (coinViewModel == null)
             {

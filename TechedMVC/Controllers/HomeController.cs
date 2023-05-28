@@ -44,7 +44,7 @@ namespace TechedMVC.Controllers
         // Umjesto popunjavanja liste nanovo, metodi se salje objekt modela u JSON formatu
         public IActionResult Details2(string Coin)
         {
-            CoinViewModel coinViewModel = JsonConvert.DeserializeObject<CoinViewModel>(Coin);
+            var coinViewModel = JsonConvert.DeserializeObject<CoinViewModel>(Coin);
 
             return View("Details", coinViewModel);
         }
