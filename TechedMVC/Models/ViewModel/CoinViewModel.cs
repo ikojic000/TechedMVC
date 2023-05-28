@@ -35,13 +35,11 @@ namespace TechedMVC.Models.ViewModel
         [JsonProperty("max_supply")]
         public double? MaxSupply { get; set; }
 
-
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         [JsonProperty("last_updated")]
         public DateTime LastUpdated { get; set; }
 
         public string LastUpdatedFormatted => LastUpdated.ToString("dd/MM/yyyy HH:mm:ss");
-
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime? ChangedAt { get; set; }
