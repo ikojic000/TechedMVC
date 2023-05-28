@@ -6,7 +6,9 @@ namespace TechedMVC.Models.Domain
     public class CoinEntity
     {
         public int Id { get; set; }
+
         public string Symbol { get; set; }
+
         public string Name { get; set; }
 
         public string ImageURL { get; set; }
