@@ -63,7 +63,8 @@ Isto kao u primjeru iznad, jedna metoda prima Id, poziva API kako bi popunila li
 ## Baza podataka
 <br />
 
-Za izradu baze podataka korišten je Entity Framework sa Code-First pristupom.  
+Za izradu baze podataka korišten je Entity Framework sa Code-First pristupom. "Coin" tablica je izgenerirana po CoinEntity model klasi.
+
 <br />
 
 ![](Readme_Images/Database_Select.png "Database SELECT")
