@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
-
-namespace TechedMVC.Models.Domain
+﻿namespace TechedMVC.Models.Domain
 {
     public class CoinEntity
     {
