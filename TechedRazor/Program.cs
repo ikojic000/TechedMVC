@@ -1,7 +1,11 @@
+using TechedRazor.Services.CoinServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<CoinMappingService>();
 
 var app = builder.Build();
 
