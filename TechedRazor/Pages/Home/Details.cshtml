@@ -2,83 +2,53 @@
 @model DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    if (Model != null)
+    {
+        ViewData["Title"] = "Detalji - " + Model.CoinModel.Name;
+    }
+    else
+    {
+        ViewData["Title"] = "Detalji";
+    }
 }
 
-<h1>Details</h1>
+<h2 class="text-center py-2">Detalji - @Model.CoinModel.Name</h2>
 
-<div>
-    <h4>CoinViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinModel.Symbol)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoinModel.Symbol)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinModel.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoinModel.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinModel.ImageURL)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoinModel.ImageURL)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinModel.CurrentPrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoinModel.CurrentPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinModel.MarketCapRank)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoinModel.MarketCapRank)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinModel.PriceChangePercentage24h)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoinModel.PriceChangePercentage24h)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinModel.CirculatingSupply)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoinModel.CirculatingSupply)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinModel.TotalSupply)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoinModel.TotalSupply)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinModel.MaxSupply)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoinModel.MaxSupply)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinModel.LastUpdated)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoinModel.LastUpdated)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinModel.ChangedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoinModel.ChangedAt)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="container">
+    <hr class="mb-5" />
+    <div class="row">
+        <div class="col-lg-6 col-md-10 mx-auto">
+            <div class="card">
+                <div class="text-center">
+                    <img src="@Url.Content(Model.CoinModel.ImageURL)" class="card-img-top img-fluid w-25" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.CoinModel.Name</h5>
+                    </div>
+                    <div class="container">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                Oznaka - <b>@Model.CoinModel.Symbol</b>
+                            </li>
+                            <li class="list-group-item">Trenutačna cijena - $ @Model.CoinModel.CurrentPrice</li>
+                            <li class="list-group-item">Promjena cijene u 24h- @Model.CoinModel.PriceChangePercentage24h%</li>
+                            <li class="list-group-item">Tržišni rang - @Model.CoinModel.MarketCapRank</li>
+                            <li class="list-group-item">Circulating Supply - @Model.CoinModel.CirculatingSupply </li>
+                            <li class="list-group-item">Total Supply - @Model.CoinModel.TotalSupply </li>
+                            <li class="list-group-item">Max Supply - @Model.CoinModel.MaxSupply</li>
+                            <li class="list-group-item">Zadnje ažurirano - @Model.CoinModel.LastUpdated </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <form method="post" asp-route-CoinId="@Model.CoinModel.Id">
+                        <input type="submit" value="Spremi u bazu" class="btn btn-primary mt-5 mb-2" />
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="text-center">
+        <a asp-page="./Index" class="btn btn-outline-primary mt-3">Početna</a>
+    </div>
 </div>

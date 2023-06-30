@@ -4,29 +4,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Build.Execution;
 using Microsoft.EntityFrameworkCore;
 using TechedRazor.Data;
 using TechedRazor.Models.Domain;
+using TechedRazor.Models.ViewModel;
+using TechedRazor.Services.CoinServices;
 
 namespace TechedRazor.Pages.Coin
 {
     public class IndexModel : PageModel
     {
-        private readonly TechedRazor.Data.TechedRazorContext _context;
+        private readonly DatabaseService _databaseService;
 
-        public IndexModel(TechedRazor.Data.TechedRazorContext context)
+        public IndexModel(DatabaseService databaseService)
         {
-            _context = context;
+            _databaseService = databaseService;
         }
 
-        public IList<CoinEntity> CoinEntity { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public IList<CoinViewModel> CoinViewModels { get; set; } = default!;
+
+        public async Task OnGet()
         {
-            if (_context.Coins != null)
-            {
-                CoinEntity = await _context.Coins.ToListAsync();
-            }
+            CoinViewModels = await _databaseService.GetAllFromDatabaseAsync();
         }
     }
 }

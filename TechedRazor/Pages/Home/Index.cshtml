@@ -5,28 +5,22 @@
 }
 
 <div class="container">
-
-    <table class="table">
+    <table id="coinTable" class="display table table-striped table-hover">
         <thead>
             <tr>
                 <th>
-                    ID
+                    @Html.DisplayNameFor(model => model.CoinViewModels[0].MarketCapRank)
                 </th>
                 <th>
-                    Market Cap Rank
+                    @Html.DisplayNameFor(model => model.CoinViewModels[0].Name)
                 </th>
                 <th>
-                    Naziv
+                    @Html.DisplayNameFor(model => model.CoinViewModels[0].CurrentPrice)
                 </th>
                 <th>
-                    Trenutačna cijena
+                    @Html.DisplayNameFor(model => model.CoinViewModels[0].LastUpdated)
                 </th>
-                <th>
-                    Last Updated
-                </th>
-                <th>
-                    botuni
-                </th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -34,28 +28,24 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(coinItem => coin.Id)
+                        @Html.DisplayFor(modelItem => coin.MarketCapRank)
                     </td>
                     <td>
-                        @Html.DisplayFor(coinItem => coin.MarketCapRank)
+                        @Html.DisplayFor(modelItem => coin.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(coinItem => coin.Name)
+                        @Html.DisplayFor(modelItem => coin.CurrentPrice)
                     </td>
                     <td>
-                        @Html.DisplayFor(coinItem => coin.CurrentPrice)
+                        @Html.DisplayFor(modelItem => coin.LastUpdated)
                     </td>
-                    <td>
-                        @Html.DisplayFor(coinItem => coin.LastUpdated)
-                    </td>
-                    <td>
-                        <a asp-page="./Details" asp-route-Coin_id="@coin.Id">Details</a>
+                    <td class="text-center">
+                        <a asp-page="./Details" asp-route-Coin_id="@coin.Id" class="btn btn-info">Details</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-
 </div>
 
 

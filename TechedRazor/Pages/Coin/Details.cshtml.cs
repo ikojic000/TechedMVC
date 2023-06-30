@@ -1,41 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TechedRazor.Data;
 using TechedRazor.Models.Domain;
+using TechedRazor.Models.ViewModel;
+using TechedRazor.Services.CoinServices;
 
 namespace TechedRazor.Pages.Coin
 {
     public class DetailsModel : PageModel
     {
-        private readonly TechedRazor.Data.TechedRazorContext _context;
 
-        public DetailsModel(TechedRazor.Data.TechedRazorContext context)
+        private readonly DatabaseService _databaseService;
+
+        public DetailsModel(DatabaseService databaseService)
         {
-            _context = context;
+            _databaseService = databaseService;
         }
 
-      public CoinEntity CoinEntity { get; set; } = default!; 
+      public CoinViewModel CoinViewModel{ get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Coins == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var coinentity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == id);
-            if (coinentity == null)
+            var coinViewModel = await _databaseService.GetCoinFromDatabaseAsync(id);
+            if (coinViewModel == null)
             {
                 return NotFound();
             }
             else 
             {
-                CoinEntity = coinentity;
+                CoinViewModel = coinViewModel;
             }
             return Page();
         }

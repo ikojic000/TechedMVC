@@ -14,6 +14,7 @@ builder.Services.AddDbContext<TechedRazorContext>(options =>
 
 builder.Services.AddScoped<CoinMappingService>();
 builder.Services.AddScoped<PublicApiService>();
+builder.Services.AddScoped<DatabaseService>();
 
 var app = builder.Build();
 
