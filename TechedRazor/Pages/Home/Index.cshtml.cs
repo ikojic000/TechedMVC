@@ -1,20 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TechedRazor.Models.ViewModel;
+using TechedRazor.Services.ApiServices;
 
 namespace TechedRazor.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly PublicApiService _publicApiService;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(PublicApiService publicApiService)
         {
-            _logger = logger;
+            _publicApiService = publicApiService;
         }
 
-        public void OnGet()
-        {
+        public IList<CoinViewModel> CoinViewModels { get; set; }
 
+        public async Task OnGet()
+        {
+            CoinViewModels = await _publicApiService.GetCoinList();
         }
     }
 }

@@ -1,0 +1,84 @@
+﻿@page
+@model TechedRazor.Pages.Coin.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>CoinEntity</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoinEntity.Symbol)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoinEntity.Symbol)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoinEntity.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoinEntity.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoinEntity.ImageURL)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoinEntity.ImageURL)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoinEntity.CurrentPrice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoinEntity.CurrentPrice)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoinEntity.MarketCapRank)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoinEntity.MarketCapRank)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoinEntity.PriceChangePercentage24h)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoinEntity.PriceChangePercentage24h)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoinEntity.CirculatingSupply)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoinEntity.CirculatingSupply)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoinEntity.TotalSupply)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoinEntity.TotalSupply)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoinEntity.MaxSupply)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoinEntity.MaxSupply)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoinEntity.LastUpdated)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoinEntity.LastUpdated)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CoinEntity.ChangedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CoinEntity.ChangedAt)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>

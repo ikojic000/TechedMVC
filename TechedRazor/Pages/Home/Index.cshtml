@@ -1,10 +1,61 @@
-﻿@page
+﻿@page "/"
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Market Cap Rank
+                </th>
+                <th>
+                    Naziv
+                </th>
+                <th>
+                    Trenutačna cijena
+                </th>
+                <th>
+                    Last Updated
+                </th>
+                <th>
+                    botuni
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var coin in Model.CoinViewModels)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(coinItem => coin.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(coinItem => coin.MarketCapRank)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(coinItem => coin.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(coinItem => coin.CurrentPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(coinItem => coin.LastUpdated)
+                    </td>
+                    <td>
+                        <a asp-page="./Details" asp-route-Coin_id="@coin.Id">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
 </div>
+
+
