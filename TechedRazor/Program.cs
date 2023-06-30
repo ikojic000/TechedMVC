@@ -35,3 +35,9 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+<<<<<<< HEAD
+
+
+// Test3 //
+=======
+>>>>>>> parent of b9e3778 (Test)
