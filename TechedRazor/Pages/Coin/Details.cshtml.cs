@@ -16,9 +16,9 @@ namespace TechedRazor.Pages.Coin
     public class DetailsModel : PageModel
     {
 
-        private readonly DatabaseService _databaseService;
+        private readonly IDatabaseService _databaseService;
 
-        public DetailsModel(DatabaseService databaseService)
+        public DetailsModel(IDatabaseService databaseService)
         {
             _databaseService = databaseService;
         }

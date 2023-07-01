@@ -1,88 +1,47 @@
-﻿@page
+﻿@page "/Coin/Delete/{id}"
 @model TechedRazor.Pages.Coin.DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>CoinEntity</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinEntity.Symbol)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CoinEntity.Symbol)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinEntity.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CoinEntity.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinEntity.ImageURL)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CoinEntity.ImageURL)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinEntity.CurrentPrice)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CoinEntity.CurrentPrice)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinEntity.MarketCapRank)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CoinEntity.MarketCapRank)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinEntity.PriceChangePercentage24h)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CoinEntity.PriceChangePercentage24h)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinEntity.CirculatingSupply)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CoinEntity.CirculatingSupply)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinEntity.TotalSupply)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CoinEntity.TotalSupply)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinEntity.MaxSupply)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CoinEntity.MaxSupply)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinEntity.LastUpdated)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CoinEntity.LastUpdated)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CoinEntity.ChangedAt)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CoinEntity.ChangedAt)
-        </dd>
-    </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="CoinEntity.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
+<h2 class="text-center py-2">Izbriši - @Model.CoinViewModel.Name</h2>
+<h4 class="text-center text-danger">Jeste li sigurni da želite izbrisati spremljenu vrijednost?</h4>
+<div class="container">
+    <hr class="mb-5" />
+    <div class="row">
+        <div class="col-lg-6 col-md-10 mx-auto">
+            <div class="card">
+                <div class="text-center">
+                    <img src="@Url.Content(Model.CoinViewModel.ImageURL)" class="img-fluid rounded-3" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.CoinViewModel.Name</h5>
+                    </div>
+                    <div class="container">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                Oznaka - <b>@Model.CoinViewModel.Symbol</b>
+                            </li>
+                            <li class="list-group-item">Trenutačna cijena - $ @Model.CoinViewModel.CurrentPrice</li>
+                            <li class="list-group-item">Promjena cijene u 24h- @Model.CoinViewModel.PriceChangePercentage24h%</li>
+                            <li class="list-group-item">Tržišni rang - @Model.CoinViewModel.MarketCapRank</li>
+                            <li class="list-group-item">Circulating Supply - @Model.CoinViewModel.CirculatingSupply </li>
+                            <li class="list-group-item">Total Supply - @Model.CoinViewModel.TotalSupply </li>
+                            <li class="list-group-item">Max Supply - @Model.CoinViewModel.MaxSupply</li>
+                            <li class="list-group-item">Zadnje ažurirano - @Model.CoinViewModel.LastUpdated</li>
+                            <li class="list-group-item">Spremljeno - @Model.CoinViewModel.ChangedAt</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                    <form asp-action="post">
+                        <input type="submit" value="Izbriši" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+            <div class="text-center">
+                <a class="btn btn-outline-primary mt-3" asp-page="./Index">Lista vrijednosti iz baze</a>
+            </div>
+        </div>
+    </div>
 </div>

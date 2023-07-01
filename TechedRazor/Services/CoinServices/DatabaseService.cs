@@ -1,17 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using TechedRazor.Data;
 using TechedRazor.Models.Domain;
 using TechedRazor.Models.ViewModel;
 
 namespace TechedRazor.Services.CoinServices
 {
-    public class DatabaseService
+    public class DatabaseService : IDatabaseService
     {
         private readonly TechedRazorContext _context;
-        private readonly CoinMappingService _coinMappingService;
+        private readonly ICoinMappingService _coinMappingService;
 
-        public DatabaseService(TechedRazorContext context, CoinMappingService coinMappingService)
+        public DatabaseService(TechedRazorContext context, ICoinMappingService coinMappingService)
         {
             _context = context;
             _coinMappingService = coinMappingService;
@@ -57,6 +56,29 @@ namespace TechedRazor.Services.CoinServices
                 }
             }
             return null;
+        }
+
+        public async void DeleteCoinFromDatabaseAsync(int? id)
+        {
+            try
+            {
+                if (id != null)
+                {
+                    var coinEntity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == id);
+
+                    if (coinEntity != null)
+                    {
+                        _context.Coins.Remove(coinEntity);
+                        _context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

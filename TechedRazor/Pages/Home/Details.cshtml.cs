@@ -8,10 +8,10 @@ namespace TechedRazor.Pages.Home
 {
     public class DetailsModel : PageModel
     {
-        private readonly PublicApiService _publicApiService;
-        private readonly DatabaseService _databaseService;
+        private readonly IPublicApiService _publicApiService;
+        private readonly IDatabaseService _databaseService;
 
-        public DetailsModel(PublicApiService publicApiService, DatabaseService databaseService)
+        public DetailsModel(IPublicApiService publicApiService, IDatabaseService databaseService)
         {
             _publicApiService = publicApiService;
             _databaseService = databaseService;

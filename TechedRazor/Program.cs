@@ -12,9 +12,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<TechedRazorContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TechedRazorContext") ?? throw new InvalidOperationException("Connection string 'TechedRazorContext' not found.")));
 
-builder.Services.AddScoped<CoinMappingService>();
-builder.Services.AddScoped<PublicApiService>();
-builder.Services.AddScoped<DatabaseService>();
+builder.Services.AddScoped<ICoinMappingService, CoinMappingService>();
+builder.Services.AddScoped<IPublicApiService, PublicApiService>();
+builder.Services.AddScoped<IDatabaseService, DatabaseService>();
 
 var app = builder.Build();
 

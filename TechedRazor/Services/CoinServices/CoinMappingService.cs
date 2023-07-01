@@ -3,7 +3,7 @@ using TechedRazor.Models.ViewModel;
 
 namespace TechedRazor.Services.CoinServices
 {
-    public class CoinMappingService
+    public class CoinMappingService : ICoinMappingService
     {
 
         public CoinViewModel MapToViewModel(CoinEntity coinEntity)
@@ -43,5 +43,6 @@ namespace TechedRazor.Services.CoinServices
             };
 
         }
+
     }
 }

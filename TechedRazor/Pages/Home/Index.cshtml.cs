@@ -7,9 +7,9 @@ namespace TechedRazor.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly PublicApiService _publicApiService;
+        private readonly IPublicApiService _publicApiService;
 
-        public IndexModel(PublicApiService publicApiService)
+        public IndexModel(IPublicApiService publicApiService)
         {
             _publicApiService = publicApiService;
         }

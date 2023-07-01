@@ -4,7 +4,7 @@ using TechedRazor.Models.ViewModel;
 
 namespace TechedRazor.Services.ApiServices
 {
-    public class PublicApiService
+    public class PublicApiService : IPublicApiService
     {
 
         private IList<CoinViewModel> _coinList = new List<CoinViewModel>();

@@ -7,55 +7,50 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TechedRazor.Data;
 using TechedRazor.Models.Domain;
+using TechedRazor.Models.ViewModel;
+using TechedRazor.Services.CoinServices;
 
 namespace TechedRazor.Pages.Coin
 {
     public class DeleteModel : PageModel
     {
-        private readonly TechedRazor.Data.TechedRazorContext _context;
+        private readonly IDatabaseService _databaseService;
 
-        public DeleteModel(TechedRazor.Data.TechedRazorContext context)
+        public DeleteModel(IDatabaseService databaseService)
         {
-            _context = context;
+            _databaseService = databaseService;
         }
 
         [BindProperty]
-      public CoinEntity CoinEntity { get; set; } = default!;
+        public CoinViewModel CoinViewModel { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Coins == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var coinentity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (coinentity == null)
+            var coinViewModel = await _databaseService.GetCoinFromDatabaseAsync(id);
+            if (coinViewModel == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
-                CoinEntity = coinentity;
+                CoinViewModel = coinViewModel;
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPost(int? id)
         {
-            if (id == null || _context.Coins == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            var coinentity = await _context.Coins.FindAsync(id);
 
-            if (coinentity != null)
-            {
-                CoinEntity = coinentity;
-                _context.Coins.Remove(CoinEntity);
-                await _context.SaveChangesAsync();
-            }
+            _databaseService.DeleteCoinFromDatabaseAsync(id);
 
             return RedirectToPage("./Index");
         }

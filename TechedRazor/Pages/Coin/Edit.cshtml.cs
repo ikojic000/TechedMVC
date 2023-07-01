@@ -13,9 +13,9 @@ namespace TechedRazor.Pages.Coin
 {
     public class EditModel : PageModel
     {
-        private readonly TechedRazor.Data.TechedRazorContext _context;
+        private readonly TechedRazorContext _context;
 
-        public EditModel(TechedRazor.Data.TechedRazorContext context)
+        public EditModel(TechedRazorContext context)
         {
             _context = context;
         }
