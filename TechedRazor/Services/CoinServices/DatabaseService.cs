@@ -58,7 +58,7 @@ namespace TechedRazor.Services.CoinServices
             return null;
         }
 
-        public async void DeleteCoinFromDatabaseAsync(int? id)
+        public async Task DeleteCoinFromDatabaseAsync(int? id)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace TechedRazor.Services.CoinServices
                     if (coinEntity != null)
                     {
                         _context.Coins.Remove(coinEntity);
-                        _context.SaveChanges();
+                        await _context.SaveChangesAsync();
                     }
                 }
             }
