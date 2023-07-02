@@ -19,7 +19,7 @@ namespace TechedRazor.Services.CoinServices
         public async Task<List<CoinViewModel>> GetAllFromDatabaseAsync()
         {
             List<CoinViewModel> coinList = new();
-            List<CoinEntity> dbList = await _context.Coins.ToListAsync();
+            var dbList = await _context.Coins.ToListAsync();
 
             foreach (CoinEntity coin in dbList)
             {
@@ -32,53 +32,51 @@ namespace TechedRazor.Services.CoinServices
         public void SaveToDatabase(CoinViewModel? coinViewModel)
         {
 
-            if (coinViewModel != null)
+            if (coinViewModel == null)
             {
-                CoinEntity coinEntity = _coinMappingService.MapToEntity(coinViewModel);
-                coinEntity.ChangedAt = DateTime.Now;
-
-                _context.Add(coinEntity);
-                _context.SaveChanges();
-
+                return;
             }
+
+            CoinEntity coinEntity = _coinMappingService.MapToEntity(coinViewModel);
+            coinEntity.ChangedAt = DateTime.Now;
+
+            _context.Add(coinEntity);
+            _context.SaveChanges();
         }
 
         public async Task<CoinViewModel> GetCoinFromDatabaseAsync(int? id)
         {
-            if (id != null)
-            {
-                var coinEntity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == id);
-                if (coinEntity != null)
-                {
-                    CoinViewModel coinViewModel = _coinMappingService.MapToViewModel(coinEntity);
+            if (id == null) return null;
+            var coinEntity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == id);
+            if (coinEntity == null) return null;
+            var coinViewModel = _coinMappingService.MapToViewModel(coinEntity);
 
-                    return coinViewModel;
-                }
-            }
-            return null;
+            return coinViewModel;
         }
 
         public async Task DeleteCoinFromDatabaseAsync(int? id)
         {
             try
             {
-                if (id != null)
+                if (id == null)
                 {
-                    var coinEntity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == id);
-
-                    if (coinEntity != null)
-                    {
-                        _context.Coins.Remove(coinEntity);
-                        await _context.SaveChangesAsync();
-                    }
+                    return;
                 }
+                var coinEntity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == id);
+
+                if (coinEntity == null)
+                {
+                    return;
+                }
+                _context.Coins.Remove(coinEntity);
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
 
                 throw;
             }
-            
+
         }
     }
 }

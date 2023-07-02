@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/TechedRazor/Migrations/20230702131019_razer-yoga-initial.cs
+/TechedRazor/Migrations/20230702131019_razer-yoga-initial.Designer.cs
+/TechedRazor/Migrations/TechedRazorContextModelSnapshot.cs
+/.idea/.idea.TechedMVC/.idea
+/TechedRazor/Migrations/TechedRazorContextModelSnapshot.cs
+/TechedRazor/Migrations/TechedRazorContextModelSnapshot.cs
