@@ -43,14 +43,14 @@ namespace TechedRazor.Pages.Coin
             return Page();
         }
 
-        public IActionResult OnPost(int? id)
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            _databaseService.DeleteCoinFromDatabaseAsync(id);
+            await _databaseService.DeleteCoinFromDatabaseAsync(id);
 
             return RedirectToPage("./Index");
         }
