@@ -3,26 +3,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using TechedRazor.Models.ViewModel;
 using TechedRazor.Services.CoinServices;
 
-namespace TechedRazor.Pages.Coin
+namespace TechedRazor.Pages.Coin;
+
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly IDatabaseService _databaseService;
+
+    public DeleteModel(IDatabaseService databaseService)
     {
-        private readonly IDatabaseService _databaseService;
+        _databaseService = databaseService;
+    }
 
-        public DeleteModel(IDatabaseService databaseService)
-        {
-            _databaseService = databaseService;
-        }
+    [BindProperty] public CoinViewModel CoinViewModel { get; set; } = default!;
 
-        [BindProperty]
-        public CoinViewModel CoinViewModel { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+    public async Task<IActionResult> OnGetAsync(int? id)
+    {
+        if (id == null) return NotFound();
 
             var coinViewModel = await _databaseService.GetCoinFromDatabaseAsync(id);
 
@@ -38,16 +34,12 @@ namespace TechedRazor.Pages.Coin
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+    public async Task<IActionResult> OnPostAsync(int? id)
+    {
+        if (id == null) return NotFound();
 
-            await _databaseService.DeleteCoinFromDatabaseAsync(id);
+        await _databaseService.DeleteCoinFromDatabaseAsync(id);
 
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }
