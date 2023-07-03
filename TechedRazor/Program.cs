@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TechedRazor.Data;
 using TechedRazor.Services.ApiServices;
+using TechedRazor.Services.CoinServices.Impl;
+using TechedRazor.Services.ApiServices.Impl;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -12,5 +12,6 @@ namespace TechedRazor.Services.CoinServices
 
         Task DeleteCoinFromDatabaseAsync(int? id);
 
+        Task UpdateCoinFromDatabase(int? id, CoinViewModel? coinViewModel);
     }
 }

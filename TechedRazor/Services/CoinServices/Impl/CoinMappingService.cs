@@ -1,7 +1,7 @@
 ﻿using TechedRazor.Models.Domain;
 using TechedRazor.Models.ViewModel;
 
-namespace TechedRazor.Services.CoinServices
+namespace TechedRazor.Services.CoinServices.Impl
 {
     public class CoinMappingService : ICoinMappingService
     {
@@ -42,6 +42,22 @@ namespace TechedRazor.Services.CoinServices
                 ChangedAt = coinViewModel.ChangedAt
             };
 
+        }
+
+        public void UpdateCoinEntity(CoinEntity? coinEntity, CoinViewModel? coinViewModel)
+        {
+            if (coinViewModel == null || coinEntity == null) { return; }
+
+            coinEntity.Symbol = coinViewModel.Symbol;
+            coinEntity.Name = coinViewModel.Name;
+            coinEntity.ImageURL = coinViewModel.ImageURL;
+            coinEntity.CurrentPrice = coinViewModel.CurrentPrice;
+            coinEntity.MarketCapRank = coinViewModel.MarketCapRank;
+            coinEntity.PriceChangePercentage24h = coinViewModel.PriceChangePercentage24h;
+            coinEntity.CirculatingSupply = coinViewModel.CirculatingSupply;
+            coinEntity.TotalSupply = coinViewModel.TotalSupply;
+            coinEntity.MaxSupply = coinViewModel.MaxSupply;
+            coinEntity.ChangedAt = DateTime.Now;
         }
 
     }

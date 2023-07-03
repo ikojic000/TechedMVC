@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using TechedRazor.Models.ViewModel;
 
-namespace TechedRazor.Services.ApiServices
+namespace TechedRazor.Services.ApiServices.Impl
 {
     public class PublicApiService : IPublicApiService
     {
@@ -15,26 +15,23 @@ namespace TechedRazor.Services.ApiServices
 
         public async Task<IList<CoinViewModel>> GetCoinList()
         {
-            if (_coinList.Count == 0)
+            if (_coinList.Count != 0) { return _coinList; }
+
+            using var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, baseURL + apiQueryString);
+            request.Headers.Add("User-Agent", apiUserAgent);
+            request.Headers.Add("Cookie", apiCookie);
+
+            var response = await client.SendAsync(request);
+
+            if (!response.IsSuccessStatusCode)
             {
-                using var client = new HttpClient();
-                var request = new HttpRequestMessage(HttpMethod.Get, baseURL + apiQueryString);
-                request.Headers.Add("User-Agent", apiUserAgent);
-                request.Headers.Add("Cookie", apiCookie);
-
-                var response = await client.SendAsync(request);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var jsonResponse = await response.Content.ReadAsStringAsync();
-                    _coinList = JsonConvert.DeserializeObject<List<CoinViewModel>>(jsonResponse);
-                }
-                else
-                {
-                    Debug.WriteLine("Request failed. Error status code: " + response.StatusCode);
-                }
-
+                Debug.WriteLine("Request failed. Error status code: " + response.StatusCode);
             }
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(jsonResponse);
+            _coinList = JsonConvert.DeserializeObject<List<CoinViewModel>>(jsonResponse);
 
             return _coinList;
         }

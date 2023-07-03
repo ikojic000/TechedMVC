@@ -16,16 +16,14 @@ namespace TechedRazor.Pages.Home
             _publicApiService = publicApiService;
             _databaseService = databaseService;
         }
+
         [BindProperty]
         public CoinViewModel CoinModel { get; set; } = default!;
 
 
         public async Task<IActionResult> OnGetAsync(string Coin_id)
         {
-            if (Coin_id == null)
-            {
-                return NotFound();
-            }
+            if (Coin_id == null) { return NotFound(); }
 
             IList<CoinViewModel> coinList = await _publicApiService.GetCoinList();
 
@@ -39,10 +37,7 @@ namespace TechedRazor.Pages.Home
 
         public async Task<IActionResult> OnPostAsync(string Coin_id)
         {
-            if (Coin_id == null)
-            {
-                return NotFound();
-            }
+            if (Coin_id == null) { return NotFound(); }
 
             IList<CoinViewModel> coinList = await _publicApiService.GetCoinList();
 

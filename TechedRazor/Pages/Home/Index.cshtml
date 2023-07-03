@@ -5,47 +5,58 @@
 }
 
 <div class="container">
-    <table id="coinTable" class="display table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.CoinViewModels[0].MarketCapRank)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CoinViewModels[0].Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CoinViewModels[0].CurrentPrice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CoinViewModels[0].LastUpdated)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var coin in Model.CoinViewModels)
-            {
+
+    @if (!Model.CoinViewModels.Any())
+    {
+        <div>
+            <h2 class="text-danger">Greška pri učitavanju podataka</h2>
+            <p>Dogodila se greška pri učitavanju podataka s CoinGecko API-ja. Molimo osvježite stranicu nakon nekoliko minuta.</p>
+        </div>
+    }
+    else
+    {
+        <table id="coinTable" class="display table table-striped table-hover">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => coin.MarketCapRank)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => coin.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => coin.CurrentPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => coin.LastUpdated)
-                    </td>
-                    <td class="text-center">
-                        <a asp-page="./Details" asp-route-Coin_id="@coin.Id" class="btn btn-info">Details</a>
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CoinViewModels[0].MarketCapRank)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CoinViewModels[0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CoinViewModels[0].CurrentPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CoinViewModels[0].LastUpdated)
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var coin in Model.CoinViewModels)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => coin.MarketCapRank)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => coin.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => coin.CurrentPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => coin.LastUpdated)
+                        </td>
+                        <td class="text-center">
+                            <a asp-page="./Details" asp-route-Coin_id="@coin.Id" class="btn btn-info">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>
 
 

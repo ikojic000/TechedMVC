@@ -7,6 +7,7 @@ namespace TechedRazor.Services.CoinServices
     {
         CoinViewModel MapToViewModel(CoinEntity coinEntity);
         CoinEntity MapToEntity(CoinViewModel coinViewModel);
+        void UpdateCoinEntity(CoinEntity coinEntity, CoinViewModel coinViewModel);
 
     }
 }

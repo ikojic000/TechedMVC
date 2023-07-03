@@ -8,70 +8,55 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TechedRazor.Data;
 using TechedRazor.Models.Domain;
+using TechedRazor.Models.ViewModel;
+using TechedRazor.Services.CoinServices;
 
 namespace TechedRazor.Pages.Coin
 {
     public class EditModel : PageModel
     {
-        private readonly TechedRazorContext _context;
+        private readonly IDatabaseService _databaseService;
 
-        public EditModel(TechedRazorContext context)
+        public EditModel(IDatabaseService databaseService)
         {
-            _context = context;
+            _databaseService = databaseService;
         }
 
         [BindProperty]
-        public CoinEntity CoinEntity { get; set; } = default!;
+        public CoinViewModel CoinViewModel { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Coins == null)
+            if (id == null) { return NotFound(); }
+
+            var coinViewModel = await _databaseService.GetCoinFromDatabaseAsync(id);
+
+            if (coinViewModel != null)
+            {
+                CoinViewModel = coinViewModel;
+            }
+            else
             {
                 return NotFound();
             }
 
-            var coinentity =  await _context.Coins.FirstOrDefaultAsync(m => m.Id == id);
-            if (coinentity == null)
-            {
-                return NotFound();
-            }
-            CoinEntity = coinentity;
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(CoinEntity).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CoinEntityExists(CoinEntity.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _databaseService.UpdateCoinFromDatabase(id, CoinViewModel);
 
             return RedirectToPage("./Index");
         }
 
-        private bool CoinEntityExists(int id)
-        {
-          return (_context.Coins?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+
     }
 }

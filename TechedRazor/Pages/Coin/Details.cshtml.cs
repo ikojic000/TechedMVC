@@ -27,20 +27,19 @@ namespace TechedRazor.Pages.Coin
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            if (id == null) { return NotFound(); }
+
+            var coinViewModel = await _databaseService.GetCoinFromDatabaseAsync(id);
+
+            if (coinViewModel != null)
+            {
+                CoinViewModel = coinViewModel;
+            }
+            else
             {
                 return NotFound();
             }
 
-            var coinViewModel = await _databaseService.GetCoinFromDatabaseAsync(id);
-            if (coinViewModel == null)
-            {
-                return NotFound();
-            }
-            else 
-            {
-                CoinViewModel = coinViewModel;
-            }
             return Page();
         }
     }

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using TechedRazor.Data;
-using TechedRazor.Models.Domain;
 using TechedRazor.Models.ViewModel;
 using TechedRazor.Services.CoinServices;
 
@@ -32,14 +25,16 @@ namespace TechedRazor.Pages.Coin
             }
 
             var coinViewModel = await _databaseService.GetCoinFromDatabaseAsync(id);
-            if (coinViewModel == null)
-            {
-                return NotFound();
-            }
-            else
+
+            if (coinViewModel != null)
             {
                 CoinViewModel = coinViewModel;
             }
+            else
+            {
+                return NotFound();
+            }
+
             return Page();
         }
 
