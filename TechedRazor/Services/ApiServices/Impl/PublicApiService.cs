@@ -30,7 +30,6 @@ namespace TechedRazor.Services.ApiServices.Impl
             }
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(jsonResponse);
             _coinList = JsonConvert.DeserializeObject<List<CoinViewModel>>(jsonResponse);
 
             return _coinList;
