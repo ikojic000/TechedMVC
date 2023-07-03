@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using TechedRazor.Data;
 using TechedRazor.Models.Domain;
 using TechedRazor.Models.ViewModel;
@@ -16,13 +18,25 @@ namespace TechedRazor.Services.CoinServices.Impl
             _coinMappingService = coinMappingService;
         }
 
-        public async Task<List<CoinViewModel>> GetAllFromDatabaseAsync()
+        public async Task<List<CoinViewModel>> GetAllFromDatabaseAsync(string nameSort, string search)
         {
+
             List<CoinViewModel> coinList = new();
             List<CoinEntity> dbList = await _context.Coins.ToListAsync();
 
             coinList.AddRange(from CoinEntity coin in dbList
                               select _coinMappingService.MapToViewModel(coin));
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                coinList = coinList.Where(coin => coin.Name.Contains(search)).ToList();
+            }
+
+            coinList = nameSort switch
+            {
+                "name_desc" => coinList.OrderByDescending(coin => coin.Name).ToList(),
+                _ => coinList.OrderBy(coin => coin.Name).ToList(),
+            };
             return coinList;
         }
 
@@ -63,33 +77,22 @@ namespace TechedRazor.Services.CoinServices.Impl
 
         }
 
-        public async Task UpdateCoinFromDatabase(int? id, CoinViewModel? coinViewModel)
+        public async Task UpdateCoinFromDatabase(CoinViewModel? coinViewModel)
         {
-            var coinEntity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == id);
+            var coinEntity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == Convert.ToInt32(coinViewModel.Id));
 
-            _context.Attach(coinEntity).State = EntityState.Modified;
+            _context.Entry(coinEntity).State = EntityState.Modified;
 
             _coinMappingService.UpdateCoinEntity(coinEntity, coinViewModel);
 
-            _context.Update(coinEntity);
-            await _context.SaveChangesAsync();
-
             try
             {
-                _context.Update(coinEntity);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CoinEntityExists(coinEntity.Id))
-                {
-                    return;
-
-                }
-                else
-                {
-                    throw;
-                }
+                if (!CoinEntityExists(coinEntity.Id)) { return; }
+                else { throw; }
             }
         }
 

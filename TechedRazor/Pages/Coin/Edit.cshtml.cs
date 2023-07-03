@@ -45,14 +45,14 @@ namespace TechedRazor.Pages.Coin
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            await _databaseService.UpdateCoinFromDatabase(id, CoinViewModel);
+            await _databaseService.UpdateCoinFromDatabase(CoinViewModel);
 
             return RedirectToPage("./Index");
         }

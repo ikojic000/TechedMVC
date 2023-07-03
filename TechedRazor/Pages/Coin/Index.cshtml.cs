@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
 using TechedRazor.Models.ViewModel;
 using TechedRazor.Services.CoinServices;
 
@@ -13,12 +14,17 @@ namespace TechedRazor.Pages.Coin
             _databaseService = databaseService;
         }
 
-
         public IList<CoinViewModel> CoinViewModels { get; set; } = default!;
+        public string NameSort { get; set; }
+        public string SearchString { get; set; }
 
-        public async Task OnGet()
+        public async Task OnGet(string sortOrder, string search)
         {
-            CoinViewModels = await _databaseService.GetAllFromDatabaseAsync();
+
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            SearchString = search;
+
+            CoinViewModels = await _databaseService.GetAllFromDatabaseAsync(NameSort, SearchString);
         }
     }
 }

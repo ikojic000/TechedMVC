@@ -7,11 +7,23 @@
 
 <h1 class="my-5">Lista spremljenih vrijednosti u bazi podataka</h1>
 <div class="container">
+    <form asp-page="./Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Traži po nazivu:
+                <input type="text" name="search" value="@Model.SearchString" />
+                <input type="submit" value="Traži" class="btn btn-primary" /> |
+                <a asp-page="./Index" class="btn btn-light">Svi podaci</a>
+            </p>
+        </div>
+    </form>
     <table id="dbTable" class="display table table-striped table-hover">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.CoinViewModels[0].Name)
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                        @Html.DisplayNameFor(model => model.CoinViewModels[0].Name)
+                    </a>
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CoinViewModels[0].CurrentPrice)
@@ -49,8 +61,8 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
-                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a>
+                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Details</a>
                             <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                         </div>
                     </td>

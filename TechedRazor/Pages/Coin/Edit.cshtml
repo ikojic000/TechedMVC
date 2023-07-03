@@ -5,81 +5,88 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h2 class="text-center py-2">Edit - @Model.CoinViewModel.Name</h2>
 
-<h4>CoinEntity</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CoinViewModel.Id" />
-            <div class="form-group">
-                <label asp-for="CoinViewModel.Symbol" class="control-label"></label>
-                <input asp-for="CoinViewModel.Symbol" class="form-control" />
-                <span asp-validation-for="CoinViewModel.Symbol" class="text-danger"></span>
+<div class="container">
+    <hr />
+    <div class="row">
+        <div class="col-lg-6 col-md-10 mx-auto">
+            <div class="card">
+                <div class="text-center">
+                    <img id="image-preview" class="img-fluid rounded-3" src="@Model.CoinViewModel.ImageURL" alt="Image Preview" />
+                </div>
+                <div class="container">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="@Model.CoinViewModel.Id" />
+                        <div class="form-group">
+                            <label asp-for="@Model.CoinViewModel.Symbol" class="control-label my-2"></label>
+                            <input asp-for="@Model.CoinViewModel.Symbol" class="form-control mb-1" />
+                            <span asp-validation-for="@Model.CoinViewModel.Symbol" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.CoinViewModel.Name" class="control-label my-2"></label>
+                            <input asp-for="@Model.CoinViewModel.Name" class="form-control mb-1" />
+                            <span asp-validation-for="@Model.CoinViewModel.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.CoinViewModel.ImageURL" class="control-label my-2"></label>
+                            <input asp-for="@Model.CoinViewModel.ImageURL" class="form-control mb-1" />
+                            <span asp-validation-for="@Model.CoinViewModel.ImageURL" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.CoinViewModel.CurrentPrice" class="control-label my-2"></label>
+                            <div class="input-group mb-1">
+                                <span class="input-group-text">$</span>
+                                <input asp-for="@Model.CoinViewModel.CurrentPrice" class="form-control" />
+                                <span asp-validation-for="@Model.CoinViewModel.CurrentPrice" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.CoinViewModel.MarketCapRank" class="control-label my-2"></label>
+                            <input asp-for="@Model.CoinViewModel.MarketCapRank" class="form-control mb-1" />
+                            <span asp-validation-for="@Model.CoinViewModel.MarketCapRank" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.CoinViewModel.PriceChangePercentage24h" class="control-label my-2"></label>
+                            <div class="input-group mb-1">
+                                <input asp-for="@Model.CoinViewModel.PriceChangePercentage24h" class="form-control" />
+                                <span class="input-group-text">%</span>
+                                <span asp-validation-for="@Model.CoinViewModel.PriceChangePercentage24h" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.CoinViewModel.CirculatingSupply" class="control-label my-2"></label>
+                            <input asp-for="@Model.CoinViewModel.CirculatingSupply" class="form-control mb-1" />
+                            <span asp-validation-for="@Model.CoinViewModel.CirculatingSupply" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.CoinViewModel.TotalSupply" class="control-label my-2"></label>
+                            <input asp-for="@Model.CoinViewModel.TotalSupply" class="form-control mb-1" />
+                            <span asp-validation-for="@Model.CoinViewModel.TotalSupply" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.CoinViewModel.MaxSupply" class="control-label my-2"></label>
+                            <input asp-for="@Model.CoinViewModel.MaxSupply" class="form-control mb-1" />
+                            <span asp-validation-for="@Model.CoinViewModel.MaxSupply" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-4 mb-1 text-center">
+                            <input type="submit" value="Spremi promjene" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="CoinViewModel.Name" class="control-label"></label>
-                <input asp-for="CoinViewModel.Name" class="form-control" />
-                <span asp-validation-for="CoinViewModel.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoinViewModel.ImageURL" class="control-label"></label>
-                <input asp-for="CoinViewModel.ImageURL" class="form-control" />
-                <span asp-validation-for="CoinViewModel.ImageURL" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoinViewModel.CurrentPrice" class="control-label"></label>
-                <input asp-for="CoinViewModel.CurrentPrice" class="form-control" />
-                <span asp-validation-for="CoinViewModel.CurrentPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoinViewModel.MarketCapRank" class="control-label"></label>
-                <input asp-for="CoinViewModel.MarketCapRank" class="form-control" />
-                <span asp-validation-for="CoinViewModel.MarketCapRank" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoinViewModel.PriceChangePercentage24h" class="control-label"></label>
-                <input asp-for="CoinViewModel.PriceChangePercentage24h" class="form-control" />
-                <span asp-validation-for="CoinViewModel.PriceChangePercentage24h" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoinViewModel.CirculatingSupply" class="control-label"></label>
-                <input asp-for="CoinViewModel.CirculatingSupply" class="form-control" />
-                <span asp-validation-for="CoinViewModel.CirculatingSupply" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoinViewModel.TotalSupply" class="control-label"></label>
-                <input asp-for="CoinViewModel.TotalSupply" class="form-control" />
-                <span asp-validation-for="CoinViewModel.TotalSupply" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoinViewModel.MaxSupply" class="control-label"></label>
-                <input asp-for="CoinViewModel.MaxSupply" class="form-control" />
-                <span asp-validation-for="CoinViewModel.MaxSupply" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoinViewModel.LastUpdated" class="control-label"></label>
-                <input asp-for="CoinViewModel.LastUpdated" class="form-control" />
-                <span asp-validation-for="CoinViewModel.LastUpdated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CoinViewModel.ChangedAt" class="control-label"></label>
-                <input asp-for="CoinViewModel.ChangedAt" class="form-control" />
-                <span asp-validation-for="CoinViewModel.ChangedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
+    <div class="text-center">
+        <a class="btn btn-outline-primary mt-3" asp-page="./Index">Back to List</a>
+    </div>
+
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
