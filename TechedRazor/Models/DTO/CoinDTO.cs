@@ -55,5 +55,7 @@ namespace TechedRazor.Models.ViewModel
         [DisplayName("Spremljeno")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime? ChangedAt { get; set; }
+
+        public string? ChangedAtFormatted => ChangedAt?.ToString("dd/MM/yyyy HH:mm:ss") ?? null;
     }
 }

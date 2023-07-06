@@ -9,10 +9,12 @@ namespace TechedRazor.Services.CoinServices.Impl
     public class CoinService : ICoinService
     {
         private readonly TechedRazorContext _context;
+        private readonly ICoinMappingService _coinMappingService;
 
-        public CoinService(TechedRazorContext context)
+        public CoinService(TechedRazorContext context, ICoinMappingService coinMappingService)
         {
             _context = context;
+            _coinMappingService = coinMappingService;
         }
 
         public async Task<JsonResult> GetAllMovies(DataTablesRequest request)
@@ -42,6 +44,8 @@ namespace TechedRazor.Services.CoinServices.Impl
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync();
+            
+            var dtoData = data.Select(coinEntity => _coinMappingService.MapToViewModel(coinEntity));
 
             return new JsonResult(
                 new
@@ -49,7 +53,7 @@ namespace TechedRazor.Services.CoinServices.Impl
                     Draw = request.draw,
                     RecordsTotal = recordsTotal,
                     RecordsFiltered = recordsFiltered,
-                    Data = data
+                    Data = dtoData
                 });
         }
     }

@@ -20,11 +20,12 @@ namespace TechedRazor.Pages.Coin
 
         public async Task OnGet(string sortOrder, string search)
         {
-
+            /*
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             SearchString = search;
 
             CoinViewModels = await _databaseService.GetAllFromDatabaseAsync(NameSort, SearchString);
+            */
         }
     }
 }
