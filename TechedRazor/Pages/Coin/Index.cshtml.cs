@@ -14,7 +14,7 @@ namespace TechedRazor.Pages.Coin
             _databaseService = databaseService;
         }
 
-        public IList<CoinViewModel> CoinViewModels { get; set; } = default!;
+        public IList<CoinDTO> CoinViewModels { get; set; } = default!;
         public string NameSort { get; set; }
         public string SearchString { get; set; }
 

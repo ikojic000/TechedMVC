@@ -6,7 +6,7 @@
 
 <div class="container">
 
-    @if (!Model.CoinViewModels.Any())
+    @if (!Model.CoinDTOList.Any())
     {
         <div>
             <h2 class="text-danger">Greška pri učitavanju podataka</h2>
@@ -19,22 +19,22 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.CoinViewModels[0].MarketCapRank)
+                        @Html.DisplayNameFor(model => model.CoinDTOList[0].MarketCapRank)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.CoinViewModels[0].Name)
+                        @Html.DisplayNameFor(model => model.CoinDTOList[0].Name)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.CoinViewModels[0].CurrentPrice)
+                        @Html.DisplayNameFor(model => model.CoinDTOList[0].CurrentPrice)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.CoinViewModels[0].LastUpdated)
+                        @Html.DisplayNameFor(model => model.CoinDTOList[0].LastUpdated)
                     </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var coin in Model.CoinViewModels)
+                @foreach (var coin in Model.CoinDTOList)
                 {
                     <tr>
                         <td>

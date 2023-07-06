@@ -4,6 +4,6 @@ namespace TechedRazor.Services.ApiServices
 {
     public interface IPublicApiService
     {
-        Task<IList<CoinViewModel>> GetCoinList();
+        Task<IList<CoinDTO>> GetCoinList();
     }
 }

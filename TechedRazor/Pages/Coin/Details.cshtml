@@ -2,10 +2,10 @@
 @model TechedRazor.Pages.Coin.DetailsModel
 
 @{
-    ViewData["Title"] = "Details - " + Model.CoinViewModel.Name;
+    ViewData["Title"] = "Details - " + Model.CoinDTO.Name;
 }
 
-<h2 class="text-center py-2">Details - @Model.CoinViewModel.Name</h2>
+<h2 class="text-center py-2">Details - @Model.CoinDTO.Name</h2>
 
 <div class="container">
     <hr class="mb-5" />
@@ -13,28 +13,28 @@
         <div class="col-lg-6 col-md-10 mx-auto">
             <div class="card">
                 <div class="text-center">
-                    <img src="@Url.Content(Model.CoinViewModel.ImageURL)" class="img-fluid rounded-3" alt="...">
+                    <img src="@Url.Content(Model.CoinDTO.ImageURL)" class="img-fluid rounded-3" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">@Model.CoinViewModel.Name</h5>
+                        <h5 class="card-title">@Model.CoinDTO.Name</h5>
                     </div>
                     <div class="container">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                Oznaka - <b>@Model.CoinViewModel.Symbol</b>
+                                Oznaka - <b>@Model.CoinDTO.Symbol</b>
                             </li>
-                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinViewModel.Name)  - $ @Model.CoinViewModel.CurrentPrice</li>
-                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinViewModel.PriceChangePercentage24h) - @Model.CoinViewModel.PriceChangePercentage24h%</li>
-                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinViewModel.MarketCapRank)- @Model.CoinViewModel.MarketCapRank</li>
-                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinViewModel.CirculatingSupply) - @Model.CoinViewModel.CirculatingSupply </li>
-                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinViewModel.TotalSupply)- @Model.CoinViewModel.TotalSupply </li>
-                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinViewModel.MaxSupply) - @Model.CoinViewModel.MaxSupply</li>
-                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinViewModel.LastUpdated) - @Model.CoinViewModel.LastUpdated</li>
-                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinViewModel.ChangedAt) - @Model.CoinViewModel.ChangedAt</li>
+                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinDTO.Name)  - $ @Model.CoinDTO.CurrentPrice</li>
+                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinDTO.PriceChangePercentage24h) - @Model.CoinDTO.PriceChangePercentage24h%</li>
+                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinDTO.MarketCapRank)- @Model.CoinDTO.MarketCapRank</li>
+                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinDTO.CirculatingSupply) - @Model.CoinDTO.CirculatingSupply </li>
+                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinDTO.TotalSupply)- @Model.CoinDTO.TotalSupply </li>
+                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinDTO.MaxSupply) - @Model.CoinDTO.MaxSupply</li>
+                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinDTO.LastUpdated) - @Model.CoinDTO.LastUpdated</li>
+                            <li class="list-group-item">@Html.DisplayNameFor(model => model.CoinDTO.ChangedAt) - @Model.CoinDTO.ChangedAt</li>
                         </ul>
                     </div>
                 </div>
                 <div class="card-body text-center">
-                    <a asp-page="./Edit" asp-route-id="@Model.CoinViewModel.Id" class="btn btn-primary">Edit</a>
+                    <a asp-page="./Edit" asp-route-id="@Model.CoinDTO.Id" class="btn btn-primary">Edit</a>
                 </div>
             </div>
         </div>

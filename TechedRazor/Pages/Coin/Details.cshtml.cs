@@ -23,17 +23,17 @@ namespace TechedRazor.Pages.Coin
             _databaseService = databaseService;
         }
 
-      public CoinViewModel CoinViewModel{ get; set; } = default!; 
+      public CoinDTO CoinDTO{ get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null) { return NotFound(); }
 
-            var coinViewModel = await _databaseService.GetCoinFromDatabaseAsync(id);
+            var coinDTO = await _databaseService.GetCoinFromDatabaseAsync(id);
 
-            if (coinViewModel != null)
+            if (coinDTO != null)
             {
-                CoinViewModel = coinViewModel;
+                CoinDTO = coinDTO;
             }
             else
             {

@@ -4,14 +4,14 @@ namespace TechedRazor.Services.CoinServices
 {
     public interface IDatabaseService
     {
-        Task<List<CoinViewModel>> GetAllFromDatabaseAsync(string nameSort, string search);
+        Task<List<CoinDTO>> GetAllFromDatabaseAsync(string nameSort, string search);
         
-        void SaveToDatabase(CoinViewModel? coinViewModel);
+        void SaveToDatabase(CoinDTO? coinDTO);
 
-        Task<CoinViewModel> GetCoinFromDatabaseAsync(int? id);
+        Task<CoinDTO> GetCoinFromDatabaseAsync(int? id);
 
         Task DeleteCoinFromDatabaseAsync(int? id);
 
-        Task UpdateCoinFromDatabase(CoinViewModel? coinViewModel);
+        Task UpdateCoinFromDatabase(CoinDTO? coinDTO);
     }
 }

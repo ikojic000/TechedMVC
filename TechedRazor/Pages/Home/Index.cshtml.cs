@@ -14,11 +14,11 @@ namespace TechedRazor.Pages
             _publicApiService = publicApiService;
         }
 
-        public IList<CoinViewModel> CoinViewModels { get; set; }
+        public IList<CoinDTO> CoinDTOList { get; set; }
 
         public async Task OnGet()
         {
-            CoinViewModels = await _publicApiService.GetCoinList();
+            CoinDTOList = await _publicApiService.GetCoinList();
         }
     }
 }

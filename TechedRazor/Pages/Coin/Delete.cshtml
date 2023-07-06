@@ -5,7 +5,7 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2 class="text-center py-2">Izbriši - @Model.CoinViewModel.Name</h2>
+<h2 class="text-center py-2">Izbriši - @Model.CoinDTO.Name</h2>
 <h4 class="text-center text-danger">Jeste li sigurni da želite izbrisati spremljenu vrijednost?</h4>
 <div class="container">
     <hr class="mb-5" />
@@ -13,23 +13,23 @@
         <div class="col-lg-6 col-md-10 mx-auto">
             <div class="card">
                 <div class="text-center">
-                    <img src="@Url.Content(Model.CoinViewModel.ImageURL)" class="img-fluid rounded-3" alt="...">
+                    <img src="@Url.Content(Model.CoinDTO.ImageURL)" class="img-fluid rounded-3" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">@Model.CoinViewModel.Name</h5>
+                        <h5 class="card-title">@Model.CoinDTO.Name</h5>
                     </div>
                     <div class="container">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                Oznaka - <b>@Model.CoinViewModel.Symbol</b>
+                                Oznaka - <b>@Model.CoinDTO.Symbol</b>
                             </li>
-                            <li class="list-group-item">Trenutačna cijena - $ @Model.CoinViewModel.CurrentPrice</li>
-                            <li class="list-group-item">Promjena cijene u 24h- @Model.CoinViewModel.PriceChangePercentage24h%</li>
-                            <li class="list-group-item">Tržišni rang - @Model.CoinViewModel.MarketCapRank</li>
-                            <li class="list-group-item">Circulating Supply - @Model.CoinViewModel.CirculatingSupply </li>
-                            <li class="list-group-item">Total Supply - @Model.CoinViewModel.TotalSupply </li>
-                            <li class="list-group-item">Max Supply - @Model.CoinViewModel.MaxSupply</li>
-                            <li class="list-group-item">Zadnje ažurirano - @Model.CoinViewModel.LastUpdated</li>
-                            <li class="list-group-item">Spremljeno - @Model.CoinViewModel.ChangedAt</li>
+                            <li class="list-group-item">Trenutačna cijena - $ @Model.CoinDTO.CurrentPrice</li>
+                            <li class="list-group-item">Promjena cijene u 24h- @Model.CoinDTO.PriceChangePercentage24h%</li>
+                            <li class="list-group-item">Tržišni rang - @Model.CoinDTO.MarketCapRank</li>
+                            <li class="list-group-item">Circulating Supply - @Model.CoinDTO.CirculatingSupply </li>
+                            <li class="list-group-item">Total Supply - @Model.CoinDTO.TotalSupply </li>
+                            <li class="list-group-item">Max Supply - @Model.CoinDTO.MaxSupply</li>
+                            <li class="list-group-item">Zadnje ažurirano - @Model.CoinDTO.LastUpdated</li>
+                            <li class="list-group-item">Spremljeno - @Model.CoinDTO.ChangedAt</li>
                         </ul>
                     </div>
                 </div>

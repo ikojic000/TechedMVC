@@ -1,8 +1,10 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics;
 using TechedRazor.Data;
 using TechedRazor.Models.Domain;
+using TechedRazor.Models.Validators;
 using TechedRazor.Models.ViewModel;
 
 namespace TechedRazor.Services.CoinServices.Impl
@@ -10,18 +12,21 @@ namespace TechedRazor.Services.CoinServices.Impl
     public class DatabaseService : IDatabaseService
     {
         private readonly TechedRazorContext _context;
+        private readonly ICoinValidationService _coinValidationService;
         private readonly ICoinMappingService _coinMappingService;
 
-        public DatabaseService(TechedRazorContext context, ICoinMappingService coinMappingService)
+        public DatabaseService(TechedRazorContext context, ICoinValidationService _validatorService, ICoinMappingService coinMappingService)
         {
             _context = context;
+            _coinValidationService = _validatorService;
             _coinMappingService = coinMappingService;
+
         }
 
-        public async Task<List<CoinViewModel>> GetAllFromDatabaseAsync(string nameSort, string search)
+        public async Task<List<CoinDTO>> GetAllFromDatabaseAsync(string nameSort, string search)
         {
 
-            List<CoinViewModel> coinList = new();
+            List<CoinDTO> coinList = new();
             List<CoinEntity> dbList = await _context.Coins.ToListAsync();
 
             coinList.AddRange(from CoinEntity coin in dbList
@@ -40,18 +45,20 @@ namespace TechedRazor.Services.CoinServices.Impl
             return coinList;
         }
 
-        public void SaveToDatabase(CoinViewModel? coinViewModel)
+        public void SaveToDatabase(CoinDTO? coinDTO)
         {
-            if (coinViewModel == null) { return; }
+            if (coinDTO == null) { return; }
 
-            CoinEntity coinEntity = _coinMappingService.MapToEntity(coinViewModel);
+            if (_coinValidationService.IsCoinDTOValid(coinDTO) is not bool || false) { return; }
+
+            CoinEntity coinEntity = _coinMappingService.MapToEntity(coinDTO);
             coinEntity.ChangedAt = DateTime.Now;
 
             _context.Add(coinEntity);
             _context.SaveChanges();
         }
 
-        public async Task<CoinViewModel> GetCoinFromDatabaseAsync(int? id)
+        public async Task<CoinDTO> GetCoinFromDatabaseAsync(int? id)
         {
             var coinEntity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == id);
 
@@ -77,13 +84,13 @@ namespace TechedRazor.Services.CoinServices.Impl
 
         }
 
-        public async Task UpdateCoinFromDatabase(CoinViewModel? coinViewModel)
+        public async Task UpdateCoinFromDatabase(CoinDTO? coinDTO)
         {
-            var coinEntity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == Convert.ToInt32(coinViewModel.Id));
+            var coinEntity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == Convert.ToInt32(coinDTO.Id));
 
             _context.Entry(coinEntity).State = EntityState.Modified;
 
-            _coinMappingService.UpdateCoinEntity(coinEntity, coinViewModel);
+            _coinMappingService.UpdateCoinEntity(coinEntity, coinDTO);
 
             try
             {

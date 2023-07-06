@@ -5,9 +5,9 @@ namespace TechedRazor.Services.CoinServices
 {
     public interface ICoinMappingService
     {
-        CoinViewModel MapToViewModel(CoinEntity coinEntity);
-        CoinEntity MapToEntity(CoinViewModel coinViewModel);
-        void UpdateCoinEntity(CoinEntity coinEntity, CoinViewModel coinViewModel);
+        CoinDTO MapToViewModel(CoinEntity coinEntity);
+        CoinEntity MapToEntity(CoinDTO coinDTO);
+        void UpdateCoinEntity(CoinEntity coinEntity, CoinDTO coinDTO);
 
     }
 }

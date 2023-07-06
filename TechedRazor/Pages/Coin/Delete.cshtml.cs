@@ -14,17 +14,17 @@ public class DeleteModel : PageModel
         _databaseService = databaseService;
     }
 
-    [BindProperty] public CoinViewModel CoinViewModel { get; set; } = default!;
+    [BindProperty] public CoinDTO CoinDTO { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
         if (id == null) return NotFound();
 
-            var coinViewModel = await _databaseService.GetCoinFromDatabaseAsync(id);
+            var coinDTO = await _databaseService.GetCoinFromDatabaseAsync(id);
 
-            if (coinViewModel != null)
+            if (coinDTO != null)
             {
-                CoinViewModel = coinViewModel;
+                CoinDTO = coinDTO;
             }
             else
             {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TechedRazor.Models.ViewModel
 {
-    public class CoinViewModel
+    public class CoinDTO
     {
         [JsonProperty("id")]
         public string Id { get; set; }

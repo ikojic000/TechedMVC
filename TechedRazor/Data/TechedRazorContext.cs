@@ -13,6 +13,6 @@ namespace TechedRazor.Data
 
         public DbSet<CoinEntity> Coins { get; set; } = default!;
 
-        public DbSet<TechedRazor.Models.ViewModel.CoinViewModel> CoinViewModel { get; set; } = default!;
+        public DbSet<TechedRazor.Models.ViewModel.CoinDTO> CoinViewModel { get; set; } = default!;
     }
 }

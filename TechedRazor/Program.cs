@@ -5,6 +5,9 @@ using TechedRazor.Data;
 using TechedRazor.Services.ApiServices;
 using TechedRazor.Services.CoinServices.Impl;
 using TechedRazor.Services.ApiServices.Impl;
+using TechedRazor.Models.Validators;
+using TechedRazor.Models.ViewModel;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +20,8 @@ builder.Services.AddDbContext<TechedRazorContext>(options =>
 builder.Services.AddScoped<ICoinMappingService, CoinMappingService>();
 builder.Services.AddScoped<IPublicApiService, PublicApiService>();
 builder.Services.AddScoped<IDatabaseService, DatabaseService>();
+builder.Services.AddScoped<ICoinValidationService, CoinValidadionService>();
+builder.Services.AddScoped<IValidator<CoinDTO>, CoinValidator>();
 
 var app = builder.Build();
 
