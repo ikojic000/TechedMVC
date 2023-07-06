@@ -1,6 +1,5 @@
 ﻿using TechedRazor.Services.CoinServices;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using TechedRazor.Data;
 using TechedRazor.Services.ApiServices;
 using TechedRazor.Services.CoinServices.Impl;
@@ -13,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<TechedRazorContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TechedRazorContext") ?? throw new InvalidOperationException("Connection string 'TechedRazorContext' not found.")));
@@ -21,6 +21,7 @@ builder.Services.AddScoped<ICoinMappingService, CoinMappingService>();
 builder.Services.AddScoped<IPublicApiService, PublicApiService>();
 builder.Services.AddScoped<IDatabaseService, DatabaseService>();
 builder.Services.AddScoped<ICoinValidationService, CoinValidadionService>();
+builder.Services.AddScoped<ICoinService, CoinService>();
 builder.Services.AddScoped<IValidator<CoinDTO>, CoinValidator>();
 
 var app = builder.Build();
