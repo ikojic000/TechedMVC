@@ -11,15 +11,15 @@ namespace TechedRazor.Models.ViewModel
 
         [DisplayName("Simbol")]
         [JsonProperty("symbol")]
-        public string Symbol { get; set; }
+        public string? Symbol { get; set; }
 
         [DisplayName("Naziv")]
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [DisplayName("Slika")]
         [JsonProperty("image")]
-        public string ImageURL { get; set; }
+        public string? ImageURL { get; set; }
 
         [DisplayName("Cijena")]
         [JsonProperty("current_price")]

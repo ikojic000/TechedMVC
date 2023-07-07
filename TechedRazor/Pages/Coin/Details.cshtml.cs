@@ -23,7 +23,7 @@ namespace TechedRazor.Pages.Coin
             _databaseService = databaseService;
         }
 
-      public CoinDTO CoinDTO{ get; set; } = default!; 
+      public Models.ViewModel.CoinDTO CoinDTO{ get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

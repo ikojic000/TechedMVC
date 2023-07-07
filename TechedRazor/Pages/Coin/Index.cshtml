@@ -7,6 +7,7 @@
 
 <h1 class="my-5">Lista spremljenih vrijednosti u bazi podataka</h1>
 <div class="container">
+    <div id="coinDetails"></div>
     <table id="dbTable" class="display table table-striped table-hover">
         <thead>
             <tr>
@@ -15,7 +16,6 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CoinViewModels[0].Name)
-                    <!-- <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"></a> -->
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.CoinViewModels[0].CurrentPrice)
@@ -45,7 +45,7 @@
                     "processing": true,
                     "serverSide": true,
                     "ajax": {
-                        "url": "/api/v1/coin",
+                        "url": "/api/v1/coin/GetCoins",
                         "type": "POST",
                         "contentType": "application/json",
                         "dataType": "json",
@@ -69,7 +69,12 @@
                             "data": "priceChangePercentage24h",
                             "name": "PriceChangePercentage24h",
                             "render": function (data, type, row) {
-                                return data + "%";
+                                if (data > 0) {
+                                    var priceFormatted = '<p class="text-success">' + data + '%</p>'
+                                } else {
+                                    var priceFormatted = '<p class="text-danger">' + data + '%</p>'
+                                }
+                                return priceFormatted;
                             }
                         },
                         {
@@ -112,7 +117,8 @@
                                     '<a href="/Coin/Edit/' + row.id + '" class="btn btn-outline-primary">Edit</a>' +
                                     '<a href="/Coin/Details/' + row.id + '" class="btn btn-outline-primary">Details</a>' +
                                     '<a href="/Coin/Delete/' + row.id + '" class="btn btn-danger">Delete</a>' +
-                                    '</div>';
+                                    '</div>' +
+                                    '<button id = "" class="btn btn-primary ms-5 btnPreview" data-coinid="' + row.id + '"> <i class="fa fa-eye" > </i></button>';
                                 return buttons;
                             }
                         }
@@ -124,4 +130,25 @@
             )
         })
     </script>
-}
+
+    <script>
+        $("#dbTable").on("click", ".btnPreview", function () {
+            var coinId = $(this).data("coinid");
+            $.ajax({
+                url: "/api/v1/Coin/Details?id=" + coinId,
+                type: "GET",
+                success: function (data) {
+                    var partialView = data;
+                    $("#coinDetails").html(partialView);
+                    $("#closeButton").on("click", function () {
+                        $("#coinDetails").empty();
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+        })
+    </script>
+    }

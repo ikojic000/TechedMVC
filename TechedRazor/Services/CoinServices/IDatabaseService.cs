@@ -8,7 +8,7 @@ namespace TechedRazor.Services.CoinServices
         
         void SaveToDatabase(CoinDTO? coinDTO);
 
-        Task<CoinDTO> GetCoinFromDatabaseAsync(int? id);
+        Task<CoinDTO?> GetCoinFromDatabaseAsync(int? id);
 
         Task DeleteCoinFromDatabaseAsync(int? id);
 

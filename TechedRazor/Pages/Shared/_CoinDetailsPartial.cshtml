@@ -1,0 +1,44 @@
+﻿@model TechedRazor.Models.ViewModel.CoinDTO
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7 col-md-10 mx-auto">
+            <div class="card px-5 mt-2 mb-5">
+                <div class="text-center">
+                    <div class="row g-3">
+                        <div class="col-md-5 align-self-center ">
+                            <img src="@Url.Content(Model.ImageURL)" class="img-fluid rounded-3 justify-content-center" alt="...">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.Name</h5>
+                            </div>
+                            <div class="container">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        Oznaka - <b>@Model.Symbol</b>
+                                    </li>
+                                    <li class="list-group-item">CurrentPrice - @Model.CurrentPrice</li>
+                                    <li class="list-group-item">PriceChangePercentage24h - @Model.PriceChangePercentage24h</li>
+                                    <li class="list-group-item">MarketCapRank - @Model.MarketCapRank</li>
+                                    <li class="list-group-item">CirculatingSupply - @Model.CirculatingSupply</li>
+                                    <li class="list-group-item">Total Supply - @Model.TotalSupply</li>
+                                    <li class="list-group-item">Max supply - @Model.MaxSupply</li>
+                                    <li class="list-group-item">Last updated - @Model.LastUpdated</li>
+                                    <li class="list-group-item">Changed At - @Model.ChangedAt</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="text-center my-3">
+                                <button class="btn btn-danger" id="closeButton"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

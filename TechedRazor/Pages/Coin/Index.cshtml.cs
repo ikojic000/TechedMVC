@@ -18,7 +18,7 @@ namespace TechedRazor.Pages.Coin
         public string NameSort { get; set; }
         public string SearchString { get; set; }
 
-        public async Task OnGet(string sortOrder, string search)
+        public void OnGet(string sortOrder, string search)
         {
             /*
             NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";

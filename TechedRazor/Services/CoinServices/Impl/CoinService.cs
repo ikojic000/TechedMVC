@@ -3,6 +3,7 @@ using RazorMovieTutorial.DataTables;
 using TechedRazor.Data;
 using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore;
+using TechedRazor.Models.ViewModel;
 
 namespace TechedRazor.Services.CoinServices.Impl
 {
@@ -17,7 +18,7 @@ namespace TechedRazor.Services.CoinServices.Impl
             _coinMappingService = coinMappingService;
         }
 
-        public async Task<JsonResult> GetAllMovies(DataTablesRequest request)
+        public async Task<JsonResult> GetAllCoins(DataTablesRequest request)
         {
             var recordsTotal = _context.Coins.Count();
             var coinsQuery = _context.Coins.AsQueryable();
@@ -55,6 +56,19 @@ namespace TechedRazor.Services.CoinServices.Impl
                     RecordsFiltered = recordsFiltered,
                     Data = dtoData
                 });
+        }
+
+        public async Task<CoinDTO?> GetCoinDetails(int? id)
+        {
+            if (id == null) { return null; }
+
+            var coin = await _context.Coins.Where(coin => coin.Id == id)
+                                           .FirstOrDefaultAsync();
+
+            if (coin == null) { return null; }
+
+            return _coinMappingService.MapToViewModel(coin);
+
         }
     }
 }

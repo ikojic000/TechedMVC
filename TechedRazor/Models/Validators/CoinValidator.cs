@@ -8,14 +8,11 @@ namespace TechedRazor.Models.Validators
         public CoinValidator()
         {
             RuleFor(coinDTO => coinDTO.CurrentPrice)
-                .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotEmpty().WithMessage("Trenutačna cijena ne smije biti prazna")
                 .NotNull().WithMessage("Trenutačna cijena ne smije biti null")
-                .Must(price => price is double).WithMessage("Trenutačna cijena mora biti type - double")
                 .GreaterThan(0).WithMessage("Trenutačna cijena ne smije biti manja od 0");
 
             RuleFor(coinDTO => coinDTO.Name)
-                .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull().WithMessage("Naziv ne smije biti null")
                 .NotEmpty().WithMessage("Naziv ne smije biti prazan")
                 .Must(IsStringValid).WithMessage("Naziv smije sadržavati samo slova");
@@ -23,8 +20,7 @@ namespace TechedRazor.Models.Validators
             RuleFor(coinDTO => coinDTO.MarketCapRank)
                 .NotEmpty()
                 .NotNull()
-                .GreaterThan(0)
-                .Must(rank => rank is int);
+                .GreaterThan(0);
 
             /*
             // TODO: Provjera iz baze

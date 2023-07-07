@@ -58,7 +58,7 @@ namespace TechedRazor.Services.CoinServices.Impl
             _context.SaveChanges();
         }
 
-        public async Task<CoinDTO> GetCoinFromDatabaseAsync(int? id)
+        public async Task<CoinDTO?> GetCoinFromDatabaseAsync(int? id)
         {
             var coinEntity = await _context.Coins.FirstOrDefaultAsync(m => m.Id == id);
 

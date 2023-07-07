@@ -14,7 +14,7 @@ public class DeleteModel : PageModel
         _databaseService = databaseService;
     }
 
-    [BindProperty] public CoinDTO CoinDTO { get; set; } = default!;
+    [BindProperty] public Models.ViewModel.CoinDTO CoinDTO { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {

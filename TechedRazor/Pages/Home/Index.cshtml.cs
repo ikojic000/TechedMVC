@@ -14,7 +14,7 @@ namespace TechedRazor.Pages
             _publicApiService = publicApiService;
         }
 
-        public IList<CoinDTO> CoinDTOList { get; set; }
+        public IList<Models.ViewModel.CoinDTO> CoinDTOList { get; set; }
 
         public async Task OnGet()
         {

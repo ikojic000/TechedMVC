@@ -18,14 +18,14 @@ namespace TechedRazor.Pages.Home
         }
 
         [BindProperty]
-        public CoinDTO CoinModel { get; set; } = default!;
+        public Models.ViewModel.CoinDTO CoinModel { get; set; } = default!;
 
 
         public async Task<IActionResult> OnGetAsync(string Coin_id)
         {
             if (Coin_id == null) { return NotFound(); }
 
-            IList<CoinDTO> coinList = await _publicApiService.GetCoinList();
+            IList<Models.ViewModel.CoinDTO> coinList = await _publicApiService.GetCoinList();
 
             var coin = coinList.FirstOrDefault(i => i.Id == Coin_id);
 
@@ -39,7 +39,7 @@ namespace TechedRazor.Pages.Home
         {
             if (Coin_id == null) { return NotFound(); }
 
-            IList<CoinDTO> coinList = await _publicApiService.GetCoinList();
+            IList<Models.ViewModel.CoinDTO> coinList = await _publicApiService.GetCoinList();
 
             var coin = coinList.FirstOrDefault(i => i.Id == Coin_id);
 
