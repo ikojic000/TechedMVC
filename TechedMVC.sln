@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechedMVC", "TechedMVC\TechedMVC.csproj", "{666EECF9-FFBC-48BD-BC55-71FC37989320}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechedRazor", "TechedRazor\TechedRazor.csproj", "{E997F2E4-AC5B-4DC2-9B3B-BED3E3CF846C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechedRazor", "TechedRazor\TechedRazor.csproj", "{E997F2E4-AC5B-4DC2-9B3B-BED3E3CF846C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

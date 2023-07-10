@@ -8,5 +8,6 @@ namespace TechedRazor.Services.CoinServices
     {
         Task<JsonResult> GetAllCoins(DataTablesRequest request);
         Task<CoinDTO?> GetCoinDetails(int? id);
+        Task EditCoinParam(int id, object newValue);
     }
 }

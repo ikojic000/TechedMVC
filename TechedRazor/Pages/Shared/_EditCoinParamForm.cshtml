@@ -1,0 +1,138 @@
+﻿@model TechedRazor.Models.ViewModel.CoinDTO
+@{
+    string columnName = ViewData["ColumnName"] as string;
+}
+<!-- The Modal -->
+<div class="modal fade" id="editCoinParamModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title">Uredi naziv</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="post" id="updateNameForm">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="@Model.Id" />
+                    @if (columnName == "Naziv")
+                    {
+                        <div class="form-group">
+                            <label asp-for="@Model.Name" class="control-label my-2"></label>
+                            <input asp-for="@Model.Name" class="form-control mb-1" />
+                            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                        </div>
+                    }
+                    else if (columnName == "Cijena")
+                    {
+                        <div class="form-group">
+                            <label asp-for="@Model.CurrentPrice" class="control-label my-2"></label>
+                            <input asp-for="@Model.CurrentPrice" class="form-control mb-1" />
+                            <span asp-validation-for="@Model.CurrentPrice" class="text-danger"></span>
+                        </div>
+                    }
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button id="btnSaveModal" type="button" class="btn btn-primary">Spremi promjene</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@*<script>
+    $("#editCoinParamModal").on("click", "#btnSaveModal", function () {
+        var coinId = @Model.Id;
+        var columnName = "@columnName";
+
+        if (columnName == "Naziv") {
+            var newName = $('#editCoinParamModal input[name="Name"]').val();
+            editCoinName(coinId, newName);
+        } else if (columnName == "Cijena") {
+            var newPrice = $('#editCoinParamModal input[name="CurrentPrice"]').val();
+            editCoinPrice(coinId, newPrice);
+        }
+    });
+
+    function editCoinName(coinId, newName) {
+        $.ajax({
+            url: "/api/v1/Coin/EditCoinName?id=" + coinId,
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(newName),
+            success: function (data) {
+                $("#editCoinParamModal").modal("hide");
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function editCoinPrice(coinId, newPrice) {
+        $.ajax({
+            url: "/api/v1/Coin/EditCoinPrice?id=" + coinId,
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(newPrice),
+            success: function (data) {
+                $("#editCoinParamModal").modal("hide");
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>*@
+
+<script>
+    $("#editCoinParamModal").on("click", "#btnSaveModal", function () {
+        var coinId = @Model.Id;
+        var columnName = "@columnName";
+        var newValue;
+
+        if (columnName === "Naziv") {
+            newValue = $('#editCoinParamModal input[name="Name"]').val();
+        } else if (columnName === "Cijena") {
+            newValue = parseFloat($('#editCoinParamModal input[name="CurrentPrice"]').val());
+        }
+
+        if (newValue !== undefined) {
+            var data = {};
+            if (columnName === "Naziv") {
+                data = { "name": newValue };
+            } else if (columnName === "Cijena") {
+                data = { "price": newValue };
+            }
+
+            editCoinParam(coinId, data);
+        }
+    });
+
+    function editCoinParam(coinId, data) {
+        $.ajax({
+            url: "/api/v1/Coin/EditCoinParam?id=" + coinId,
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(data),
+            success: function (data) {
+                $("#editCoinParamModal").modal("hide");
+                location.reload();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
+

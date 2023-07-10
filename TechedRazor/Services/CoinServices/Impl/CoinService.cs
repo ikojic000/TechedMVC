@@ -4,6 +4,7 @@ using TechedRazor.Data;
 using System.Linq.Dynamic.Core;
 using Microsoft.EntityFrameworkCore;
 using TechedRazor.Models.ViewModel;
+using FluentValidation.Results;
 
 namespace TechedRazor.Services.CoinServices.Impl
 {
@@ -11,11 +12,15 @@ namespace TechedRazor.Services.CoinServices.Impl
     {
         private readonly TechedRazorContext _context;
         private readonly ICoinMappingService _coinMappingService;
+        private readonly ICoinValidationService _coinValidationService;
+        private readonly IDatabaseService _databaseService;
 
-        public CoinService(TechedRazorContext context, ICoinMappingService coinMappingService)
+        public CoinService(TechedRazorContext context, ICoinMappingService coinMappingService, ICoinValidationService coinValidationService, IDatabaseService databaseService)
         {
             _context = context;
             _coinMappingService = coinMappingService;
+            _coinValidationService = coinValidationService;
+            _databaseService = databaseService;
         }
 
         public async Task<JsonResult> GetAllCoins(DataTablesRequest request)
@@ -45,7 +50,7 @@ namespace TechedRazor.Services.CoinServices.Impl
                 .Skip(skip)
                 .Take(take)
                 .ToListAsync();
-            
+
             var dtoData = data.Select(coinEntity => _coinMappingService.MapToViewModel(coinEntity));
 
             return new JsonResult(
@@ -70,5 +75,61 @@ namespace TechedRazor.Services.CoinServices.Impl
             return _coinMappingService.MapToViewModel(coin);
 
         }
+
+        //public async Task EditCoinParam(int id, string newName)
+        //{
+        //    var coinDTO = await _databaseService.GetCoinFromDatabaseAsync(id);
+        //    if (coinDTO == null) { return; }
+        //    coinDTO.Name = newName;
+        //    var result = _coinValidationService.IsCoinDTOValid(coinDTO);
+        //    if (result is ValidationResult)
+        //    {
+        //        return;
+        //    }
+        //    await _databaseService.UpdateCoinFromDatabase(coinDTO);
+        //}
+
+        //public async Task EditCoinParam(int id, double newPrice)
+        //{
+        //    var coinDTO = await _databaseService.GetCoinFromDatabaseAsync(id);
+        //    if (coinDTO == null) { return; }
+        //    coinDTO.CurrentPrice = newPrice;
+        //    var result = _coinValidationService.IsCoinDTOValid(coinDTO);
+        //    if (result is ValidationResult)
+        //    {
+        //        return;
+        //    }
+        //    await _databaseService.UpdateCoinFromDatabase(coinDTO);
+        //}
+
+        public async Task EditCoinParam(int id, object newValue)
+        {
+            var coinDTO = await _databaseService.GetCoinFromDatabaseAsync(id);
+
+            if (coinDTO == null) { return; }
+
+            if (newValue is string newName)
+            {
+                coinDTO.Name = newName;
+            }
+            else if (newValue is double newPrice)
+            {
+                coinDTO.CurrentPrice = newPrice;
+            }
+            else
+            {
+                return;
+            }
+
+            var result = _coinValidationService.IsCoinDTOValid(coinDTO);
+            if (result is ValidationResult)
+            {
+                return;
+            }
+
+            await _databaseService.UpdateCoinFromDatabase(coinDTO);
+        }
+
+
     }
 }

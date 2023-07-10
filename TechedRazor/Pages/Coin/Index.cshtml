@@ -5,10 +5,10 @@
     ViewData["Title"] = "Spremljene vrijednosti";
 }
 
+<div id="coinDetails"></div>
 <h1 class="my-5">Lista spremljenih vrijednosti u bazi podataka</h1>
 <div class="container">
-    <div id="coinDetails"></div>
-    <table id="dbTable" class="display table table-striped table-hover">
+    <table id="dbTable" class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>
@@ -57,12 +57,24 @@
                     "order": [5, 'desc'],
                     "columns": [
                         { "data": "id", "name": "Id", "visible": false },
-                        { "data": "name", "name": "Name", },
+                        {
+                            "data": "name",
+                            "name": "Name",
+                            "render": function (data, type, row) {
+                                return '<div class="d-flex justify-content-between align-items-center">' +
+                                    '<span>' + data + '</span>' +
+                                    '<button id="" class="btn btn-outline-dark btn-sm btnEdit" data-coinid="' + row.id + '"><i class="fa fa-edit"></i></button>' +
+                                    '</div>';
+                            }
+                        },
                         {
                             "data": "currentPrice",
                             "name": "CurrentPrice",
                             "render": function (data, type, row) {
-                                return "$ " + data;
+                                return '<div class="d-flex justify-content-between align-items-center">' +
+                                    '<span>' + "$ " + data.toFixed(2) + '</span>' +
+                                    '<button id="" class="btn btn-outline-dark btn-sm btnEdit" data-coinid="' + row.id + '"><i class="fa fa-edit"></i></button>' +
+                                    '</div>';
                             }
                         },
                         {
@@ -70,9 +82,9 @@
                             "name": "PriceChangePercentage24h",
                             "render": function (data, type, row) {
                                 if (data > 0) {
-                                    var priceFormatted = '<p class="text-success">' + data + '%</p>'
+                                    var priceFormatted = '<p class="text-center text-success">' + data.toFixed(2) + '%</p>'
                                 } else {
-                                    var priceFormatted = '<p class="text-danger">' + data + '%</p>'
+                                    var priceFormatted = '<p class="text-center text-danger">' + data.toFixed(2) + '%</p>'
                                 }
                                 return priceFormatted;
                             }
@@ -113,12 +125,14 @@
                             "data": null,
                             "orderable": false,
                             "render": function (data, type, row) {
-                                var buttons = '<div class="btn-group">' +
-                                    '<a href="/Coin/Edit/' + row.id + '" class="btn btn-outline-primary">Edit</a>' +
-                                    '<a href="/Coin/Details/' + row.id + '" class="btn btn-outline-primary">Details</a>' +
-                                    '<a href="/Coin/Delete/' + row.id + '" class="btn btn-danger">Delete</a>' +
+                                var buttons = '<div class="d-flex justify-content-between align-items-center">' +
+                                    '<div class="btn-group">' +
+                                    '<a href="/Coin/Edit/' + row.id + '" class="btn btn-sm btn-outline-primary">Edit</a>' +
+                                    '<a href="/Coin/Details/' + row.id + '" class="btn btn-sm btn-outline-primary">Details</a>' +
+                                    '<a href="/Coin/Delete/' + row.id + '" class="btn btn-sm btn-danger">Delete</a>' +
                                     '</div>' +
-                                    '<button id = "" class="btn btn-primary ms-5 btnPreview" data-coinid="' + row.id + '"> <i class="fa fa-eye" > </i></button>';
+                                    '<button class="btn btn-sm btn-primary btnPreview" data-coinid="' + row.id + '"> <i class="fa fa-eye" > </i></button>' +
+                                    '</div>';
                                 return buttons;
                             }
                         }
@@ -140,9 +154,10 @@
                 success: function (data) {
                     var partialView = data;
                     $("#coinDetails").html(partialView);
-                    $("#closeButton").on("click", function () {
-                        $("#coinDetails").empty();
-                    });
+                    $("#coinDetailsModal").modal("show");
+                    //$("#closeButton").on("click", function () {
+                    //    $("#coinDetails").empty();
+                    //});
                 },
                 error: function (error) {
                     console.log(error);
@@ -150,5 +165,25 @@
             });
 
         })
+    </script>
+
+    <script>
+        $("#dbTable").on("click", ".btnEdit", function () {
+            var coinId = $(this).data("coinid");
+            var columnIndex = $(this).closest("td").index();
+            var columnName = $("#dbTable thead th").eq(columnIndex).text().trim();
+            $.ajax({
+                url: "/api/v1/Coin/EditCoinName?id=" + coinId + "&columnName=" + columnName,
+                type: "GET",
+                success: function (data) {
+                    var modalPartialView = data;
+                    $("#coinDetails").html(modalPartialView);
+                    $("#editCoinParamModal").modal("show");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
     </script>
     }
