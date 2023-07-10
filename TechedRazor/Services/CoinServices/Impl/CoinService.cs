@@ -23,6 +23,8 @@ namespace TechedRazor.Services.CoinServices.Impl
             _databaseService = databaseService;
         }
 
+
+
         public async Task<JsonResult> GetAllCoins(DataTablesRequest request)
         {
             var recordsTotal = _context.Coins.Count();
@@ -122,14 +124,9 @@ namespace TechedRazor.Services.CoinServices.Impl
             }
 
             var result = _coinValidationService.IsCoinDTOValid(coinDTO);
-            if (result is ValidationResult)
-            {
-                return;
-            }
+            if (result is ValidationResult) { return; }
 
             await _databaseService.UpdateCoinFromDatabase(coinDTO);
         }
-
-
     }
 }

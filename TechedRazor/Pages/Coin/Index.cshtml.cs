@@ -15,17 +15,10 @@ namespace TechedRazor.Pages.Coin
         }
 
         public IList<CoinDTO> CoinViewModels { get; set; } = default!;
-        public string NameSort { get; set; }
-        public string SearchString { get; set; }
 
-        public void OnGet(string sortOrder, string search)
+
+        public void OnGet()
         {
-            /*
-            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            SearchString = search;
-
-            CoinViewModels = await _databaseService.GetAllFromDatabaseAsync(NameSort, SearchString);
-            */
         }
     }
 }

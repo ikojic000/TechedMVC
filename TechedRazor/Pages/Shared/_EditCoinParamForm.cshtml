@@ -44,55 +44,6 @@
     </div>
 </div>
 
-@*<script>
-    $("#editCoinParamModal").on("click", "#btnSaveModal", function () {
-        var coinId = @Model.Id;
-        var columnName = "@columnName";
-
-        if (columnName == "Naziv") {
-            var newName = $('#editCoinParamModal input[name="Name"]').val();
-            editCoinName(coinId, newName);
-        } else if (columnName == "Cijena") {
-            var newPrice = $('#editCoinParamModal input[name="CurrentPrice"]').val();
-            editCoinPrice(coinId, newPrice);
-        }
-    });
-
-    function editCoinName(coinId, newName) {
-        $.ajax({
-            url: "/api/v1/Coin/EditCoinName?id=" + coinId,
-            type: "POST",
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify(newName),
-            success: function (data) {
-                $("#editCoinParamModal").modal("hide");
-                location.reload();
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
-
-    function editCoinPrice(coinId, newPrice) {
-        $.ajax({
-            url: "/api/v1/Coin/EditCoinPrice?id=" + coinId,
-            type: "POST",
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify(newPrice),
-            success: function (data) {
-                $("#editCoinParamModal").modal("hide");
-                location.reload();
-            },
-            error: function (error) {
-                console.log(error);
-            }
-        });
-    }
-</script>*@
-
 <script>
     $("#editCoinParamModal").on("click", "#btnSaveModal", function () {
         var coinId = @Model.Id;

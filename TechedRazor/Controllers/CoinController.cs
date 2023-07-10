@@ -38,14 +38,6 @@ namespace TechedRazor.Controllers
             return PartialView("_CoinDetailsPartial", coin);
         }
 
-        //[HttpGet]
-        //[Route("EditCoinName")]
-        //public async Task<IActionResult> EditCoinName(int? id)
-        //{
-        //    var coin = await _coinService.GetCoinDetails(id);
-        //    return PartialView("_ChangeNameForm", coin);
-        //}
-
         [HttpGet]
         [Route("EditCoinName")]
         public async Task<IActionResult> EditCoinName(int? id, string columnName)
@@ -73,7 +65,7 @@ namespace TechedRazor.Controllers
 
         [HttpPost]
         [Route("EditCoinParam")]
-        public async Task<IActionResult> EditCoinParam(int id, [FromBody] CoinEditParamDTO param)
+        public async Task<IActionResult> EditCoinParam(int id, [FromBody] CoinParamDTO param)
         {
             if (param.Name != null)
             {
